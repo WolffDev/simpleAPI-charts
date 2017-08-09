@@ -1,6 +1,12 @@
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Todo = mongoose.model('Todo', {
+let ObjectId = mongoose.Schema.Types.ObjectId;
+
+let Todo = mongoose.model('Todo', {
+  _id: {
+		type: ObjectId,
+		required: true
+	},
   text: {
     type: String,
     required: true,

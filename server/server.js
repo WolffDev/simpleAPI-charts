@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
 
 const {mongoose} = require('./db/mongoose');
-const {Todo} = require('./models/Todo.js');
-const {User} = require('./models/User.js');
+// const {Todo} = require('./models/Todo.js');
+// const {User} = require('./models/User.js');
 
 const api = require('./routes/api.js');
 

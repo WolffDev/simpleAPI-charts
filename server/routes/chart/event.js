@@ -1,9 +1,9 @@
 const route = require('express').Router();
 const {ObjectId} = require('mongodb');
 
-const {Event} = require('../models/Event.js');
-const {Annotation} = require('../models/Annotation.js');
-const {EventList} = require('../models/EventList.js');
+const {Event} = require('../../models/chartModels/Event.js');
+const {Annotation} = require('../../models/chartModels/Annotation.js');
+const {EventList} = require('../../models/chartModels/EventList.js');
 
 // Add Event
 route.post('/', (req, res) => {
