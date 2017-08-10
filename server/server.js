@@ -2,7 +2,7 @@ const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
-
+const cors = require('cors');
 const {mongoose} = require('./db/mongoose');
 // const {Todo} = require('./models/Todo.js');
 // const {User} = require('./models/User.js');
@@ -13,6 +13,8 @@ const api = require('./routes/api.js');
 
 const app = express();
 const port = process.env.PORT || 4444;
+
+app.use(cors());
 
 app.use(bodyParser.json());
 

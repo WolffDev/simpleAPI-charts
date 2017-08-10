@@ -8,8 +8,7 @@ route.get('/', (req, res) => {
 	LineChart.find().then( (lineChart) => {
 		res.send(lineChart);
 	}, (e) => {
-		res.status(400)
-			.send(e);
+		res.status(400).send(e);
 	});
 });
 
