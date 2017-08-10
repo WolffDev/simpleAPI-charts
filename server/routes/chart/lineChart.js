@@ -12,6 +12,25 @@ route.get('/', (req, res) => {
 	});
 });
 
+route.get('/:id', (req, res) => {
+
+	let id = req.params.id;
+	
+	if(!ObjectId.isValid(id)) {
+		return res.status(404).send();
+	}
+
+	LineChart.findById(id).then( (event) => {
+		if(!event) { 
+			res.status(404).send('Invalid ID');
+		}
+		
+		res.send( event );
+	}).catch( (e) => {
+		res.status(404).send(e);
+	});
+});
+
 route.post('/', (req, res) => {
 
 	let objId = new ObjectId();
