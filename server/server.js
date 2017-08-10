@@ -2,6 +2,7 @@ const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const {ObjectId} = require('mongodb');
+// https://stackoverflow.com/questions/7067966/how-to-allow-cors
 const cors = require('cors');
 const {mongoose} = require('./db/mongoose');
 // const {Todo} = require('./models/Todo.js');
