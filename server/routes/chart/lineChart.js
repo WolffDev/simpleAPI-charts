@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const { LineChart } = require('../../models/chartModels/LineChartModel.js');
 
-// Get Event List
+// Get sll LineCharts
 route.get('/', (req, res) => {
 	LineChart.find().then( (lineChart) => {
 		res.send(lineChart);
@@ -12,6 +12,7 @@ route.get('/', (req, res) => {
 	});
 });
 
+// Get single LineChart, depending on the ID
 route.get('/:id', (req, res) => {
 
 	let id = req.params.id;
@@ -31,6 +32,7 @@ route.get('/:id', (req, res) => {
 	});
 });
 
+// Create new LineChart - returns with the new linechart that was created as responds
 route.post('/', (req, res) => {
 
 	let objId = new ObjectId();
@@ -52,7 +54,7 @@ route.post('/', (req, res) => {
 	});
 
 	lineChart.save().then( (doc) => {
-		res.status(200)
+		res.status(201)
 			.send(doc);
 	}, (e) => {
 		res.status(400)
@@ -61,6 +63,9 @@ route.post('/', (req, res) => {
 
 });
 
+// Update an existing linechart, from ID.
+// Using PUT endpoint, so all the data has to be send to the API, otherwise the field will be empty.
+// Responds with the new data that has been updated
 // PUT vs PATCH
 // https://stackoverflow.com/questions/28459418/rest-api-put-vs-patch-with-real-life-examples
 route.put('/:id', (req, res) => {
@@ -93,6 +98,26 @@ route.put('/:id', (req, res) => {
 		res.send(event);
 	}).catch( e => res.status(400).send(e) );
 
+});
+
+// Delete a linechart with the giving ID
+route.delete('/:id', (req, res) => {
+
+	let id = req.params.id;
+
+	if(!ObjectId.isValid(id)) {
+		return res.status(404).send("Invalid ID");
+	}
+
+	LineChart.findByIdAndRemove(id).then( (event) => {
+		if(!event) {
+			return res.status.status(404).send("ID does not exist");
+		}
+
+		res.send(event);
+	}).catch( (e) => {
+		res.status(400).send(e);
+	});
 });
 
 
