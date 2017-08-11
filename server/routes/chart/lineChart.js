@@ -61,6 +61,40 @@ route.post('/', (req, res) => {
 
 });
 
+// PUT vs PATCH
+// https://stackoverflow.com/questions/28459418/rest-api-put-vs-patch-with-real-life-examples
+route.put('/:id', (req, res) => {
+
+	let id = req.params.id;
+	
+	if(!ObjectId.isValid(id)) {
+		return res.status(404).send();
+	}
+
+	let body = {
+		_id: id,
+		clientId: req.body.clientId,
+		clientName: req.body.clientName,
+		title: req.body.title,
+		subtitle: req.body.subtitle,
+		xAxis: {
+			categories: req.body.xAxis.categories,
+			text: req.body.xAxis.text
+		},
+		yAxis: {
+			text: req.body.yAxis.text
+		},
+		series: req.body.series
+	};
+
+	LineChart.findByIdAndUpdate(id, { $set: body }, { new: true }).then( (event) => {
+		if(!event) res.status(404).send("Invalid ID");
+
+		res.send(event);
+	}).catch( e => res.status(400).send(e) );
+
+});
+
 
 
 
